@@ -1,0 +1,30 @@
+# Dependencies and generated output
+node_modules/
+dist/
+
+# Local environment files and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Logs
+*.log
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Test, tool, and compiler output
+coverage/
+.cache/
+*.tsbuildinfo
+
+# Local AI tool configuration
+**/.claude/settings.local.json
+apps/mobile/.claude/settings.json
