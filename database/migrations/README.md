@@ -1,13 +1,19 @@
 # Database migrations
 
-This directory is reserved for reviewed, versioned MySQL migrations. Phase 1 Step 1.7 creates no schema, tables, seed data, or executable migration files, and selects no migration tool.
+This directory contains reviewed candidate, versioned MySQL migrations. Creating a
+migration file does not authorize executing it. The API runner requires the explicit
+`ALLOW_MIGRATIONS=true` process gate and records filename version plus SHA-256 checksum
+in `schema_migrations` so an applied file is never silently rerun or edited.
 
 ## Naming and ordering
 
 - After the schema and migration tooling are explicitly approved, name files with an immutable UTC timestamp followed by a short lower-snake-case description, for example `20261119143000_create_example_table.sql`.
 - Apply migrations in ascending filename order. Never rename or reorder a migration after it has been shared or applied.
 - Keep each migration focused on one coherent database change. Do not mix seed data or unrelated domains into a schema migration.
-- Record any future tool-specific metadata only after the migration tool is approved.
+- The local runner prints every applied or already-applied version. A changed checksum
+  for an applied migration fails closed.
+- MySQL DDL may commit implicitly. A partial DDL failure requires inspection and a new
+  reviewed forward migration; the runner does not pretend it can roll DDL back.
 
 ## Rollback policy
 

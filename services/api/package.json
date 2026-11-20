@@ -6,13 +6,17 @@
   "scripts": {
     "start": "node index.js",
     "db:check": "node scripts/check-db-connection.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:migrate": "node scripts/run-migrations.js",
+    "db:seed:demo-legal": "node scripts/seed-demo-legal-documents.js",
+    "check:syntax": "node --check index.js && node --check scripts/run-migrations.js && node --check scripts/seed-demo-legal-documents.js && node --check src/app.js && node --check src/middleware/api-error.js && node --check src/middleware/error-handler.js && node --check src/middleware/participant-auth.js && node --check src/modules/auth/auth.controller.js && node --check src/modules/auth/auth.routes.js && node --check src/modules/auth/auth.validation.js && node --check src/modules/auth/demo-legal-documents.js && node --check src/modules/auth/password-hasher.js && node --check src/modules/auth/registration.errors.js && node --check src/modules/auth/registration.repository.js && node --check src/modules/auth/registration.repository.mysql.js && node --check src/modules/auth/registration.service.js && node --check src/modules/auth/session-token.js && node --check src/modules/auth/session.repository.mysql.js && node --check src/modules/auth/session.service.js && node --check test/auth.test.js && node --check test/demo-legal-seed.test.js && node --check test/migrations.test.js && node --check test/participant-auth.test.js && node --check test/registration.repository.mysql.test.js && node --check test/registration.service.test.js && node --check test/session.service.test.js",
+    "test": "node --test test/auth.test.js test/demo-legal-seed.test.js test/migrations.test.js test/participant-auth.test.js test/registration.repository.mysql.test.js test/registration.service.test.js test/session.service.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "argon2": "^0.45.2",
     "cors": "^2.8.6",
     "dotenv": "^18.0.10",
     "express": "^5.3.0",
